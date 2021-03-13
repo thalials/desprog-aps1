@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -pedantic -std=c99 -Og
+CFLAGS=-Wall -pedantic -std=c99 -Og -g
 LFLAGS=-lm
 OBJCMD=$(CC) $(CFLAGS) $< -c
 EXECMD=$(CC) $^ -o $@ $(LFLAGS)
