@@ -16,6 +16,10 @@ int verify(point p, point a, point b) {
         return 2;
     }
 
+    //if(((a.y > p.y) && (b.y < p.y)) || ((b.y > p.y) && (a.y < p.y))){
+        //return 1;
+    //}
+
     return 0;
 }
 
