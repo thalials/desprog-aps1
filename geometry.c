@@ -1,5 +1,5 @@
 #include <math.h>
-
+#include <stdio.h>
 #include "geometry.h"
 
 double absolute(double n) {
@@ -40,9 +40,23 @@ int verify(point p, point a, point b) {
                     if (tangente_beta > tangente_theta) {
                         return 0;
                     }
+
+                    if (tangente_beta == tangente_theta) {
+                        return 0;
+                    }
                 }
 
-            }
+
+                // caso em que o seg de reta tem coef angular < 0
+                if (tangente_beta < 0 && tangente_theta < 0 ) {
+                    if (absolute(tangente_theta) > absolute(tangente_beta)) {
+                        return 0;
+                    }
+                } 
+                if (tangente_beta < 0 && tangente_theta > 0) {
+                    return 0;
+                }
+            }            
         }
 
         // caso em que o segmento de reta preto é vertical 
@@ -66,19 +80,35 @@ int verify(point p, point a, point b) {
 
     if ((b.y >= p.y) && (a.y <= p.y)) {
         
-        // caso em que o segmento de reta preto é inclinado 
+        // caso em que o segmento de reta é inclinado 
         if ( a.x != b.x ) {
             if (p.x != a.x) {
                 double tg_theta1 = tangente(a, p);
                 double tg_beta1 = tangente(a, b);
 
+                // caso em que o seg de reta tem coef angular > 0 
                 if (tg_beta1 > 0) {
-                    if (tg_beta1 > tg_theta1) {
+                    if (tg_beta1 > tg_theta1 ) {
+                        return 0;
+                    }
+
+                    if (tg_beta1 - tg_theta1 < 0.000001 ) {
                         return 0;
                     }
 
                 }
+
+            // caso em que o seg de reta tem coef angular < 0
+                if (tg_beta1 < 0 && tg_theta1 < 0 ) {
+                    if (absolute(tg_theta1) > absolute(tg_beta1)) {
+                        return 0;
+                    }
+                } 
+                if (tg_beta1 < 0 && tg_theta1 > 0) {
+                    return 0;
+                }
             }
+
         }
 
         // caso em que o seg de reta é vertical 
