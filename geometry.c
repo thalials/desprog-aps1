@@ -34,6 +34,18 @@ int verify(point p, point a, point b) {
 
             // caso em que o seg de reta é horizontal
             if (a.y == b.y) {
+                if (p.y == a.y) {
+                    if (a.x < b.x) {
+                        if (p.x < a.x) {
+                            return 0;
+                        }
+                    }
+                    if (b.x < a.x) {
+                        if (p.x < b.x) {
+                            return 0;
+                        }
+                    }
+                }
                 if (p.x > b.x || p.x > a.x) {
                     return 0;
                 }
@@ -83,12 +95,19 @@ int verify(point p, point a, point b) {
             }            
         }
 
+        // caso em que o segmento de reta é pontual a(x, y) = b(x, y)
+        if (a.x == b.x && a.y == b.y) {
+            return 0;
+        }
+
         // caso em que o segmento de reta preto é vertical 
         if (a.x == b.x) {
             if (p.x > a.x) {
                 return 0;
             }
-
+            if (a.y == p.y && p.x < a.x ) {
+                return 1;
+            }
             if ((b.y == p.y) || (a.y == p.y)) {
                 if (p.x < b.x) {
                     return 0;
@@ -161,11 +180,12 @@ int verify(point p, point a, point b) {
 
         // caso em que o seg de reta é vertical 
         if (b.x == a.x) {
-            // if ( p.y == b.y ) {
-            //     return 1;
-            // }
             if ( p.x > b.x ) {
                 return 0;
+            }
+
+            if (b.y == p.y && p.x < b.x ) {
+                return 1;
             }
 
             if ( (p.y == a.y) || (p.y == b.y) ) {
