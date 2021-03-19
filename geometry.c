@@ -210,7 +210,40 @@ int verify(point p, point a, point b) {
 
 }
 
-int inside(point p, point poly[], int n) {
+int verifica_par_impar (int n) {
+    // n é impar
+    if (n%2 == 1) {
+        return 1;
+    }
+    // n é par
     return 0;
 }
+
+int inside(point p, point poly[], int n) {
+    int verifica;
+    int soma = 0;
+
+    int i;
+    for (i = 0; i < n-1; i++) {
+        verifica = verify(p,poly[i],poly[i+1]);
+        // para cada i entre 0 e n-2 
+        // se o ponto estiver na parede, considera-se que ele esta dentro do poligono
+        if (verifica == 2) {
+            return 1;
+        }
+        // para que o ponto esteja dentro do poligono, a soma deve ser impar
+        soma += verifica;
+    }
+
+    verifica = verify(p,poly[n-1],poly[0]);
+    if (verifica == 2){
+        return 1;
+    } 
+    // para que o ponto esteja dentro do poligono, a soma deve ser impar
+    soma += verifica;
+
+    return verifica_par_impar(soma);    
+}
+
+
 
