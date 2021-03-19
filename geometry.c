@@ -22,7 +22,6 @@ int verify(point p, point a, point b) {
     double tam_a = pow((pow(a.x - p.x, 2) + pow(a.y - p.y, 2)), 0.5);
     double tam_b = pow((pow(b.x - p.x, 2) + pow(b.y - p.y, 2)), 0.5);
 
-    // 89 testes que devem retornar 2
     if (absolute(tam_a + tam_b) - absolute(tam_aresta) < 0.000001) {
         return 2;
     }
@@ -202,7 +201,6 @@ int verify(point p, point a, point b) {
         return 1;
     }
 
-    // 412 testes que devem retornar 0
     else {
         return 0;
     }
